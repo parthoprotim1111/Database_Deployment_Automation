@@ -21,11 +21,14 @@ node {
         sh 'aws rds wait db-instance-available --db-instance-identifier $DB_INSTANCE_IDENTIFIER'
     }
     
+    
     // Stage: Create Schema
-    stage('Create Schema') {
-        // Connect to RDS instance and create schema
-        sh 'psql -h database-1.cyhjwoyrhm6n.us-east-1.rds.amazonaws.com -U partho -d database-1 -c "CREATE SCHEMA $DB_SCHEMA_NAME"'
+stage('Create Schema') {
+    withCredentials([usernamePassword(credentialsId: 'my-db-credentials', usernameVariable: 'DB_USERNAME', passwordVariable: 'DB_PASSWORD')]) {
+        sh "psql -h database-1.cyhjwoyrhm6n.us-east-1.rds.amazonaws.com -U $DB_USERNAME -d database-1 -c 'CREATE SCHEMA $DB_SCHEMA_NAME'"
     }
+}
+
     
     // Stage: Run Tests
     stage('Run Tests') {
