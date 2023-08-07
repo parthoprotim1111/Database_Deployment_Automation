@@ -24,7 +24,7 @@ node {
     // Stage: Create Schema
     stage('Create Schema') {
         // Connect to RDS instance and create schema
-        sh 'psql -h <RDS_ENDPOINT> -U <DB_USERNAME> -d <DB_NAME> -c "CREATE SCHEMA $DB_SCHEMA_NAME"'
+        sh 'psql -h database-1.cyhjwoyrhm6n.us-east-1.rds.amazonaws.com -U partho -d database-1 -c "CREATE SCHEMA $DB_SCHEMA_NAME"'
     }
     
     // Stage: Run Tests
