@@ -12,7 +12,7 @@ node {
     // Stage: Create RDS Instance
     stage('Create RDS Instance') {
         // Create RDS instance using AWS CLI or SDK
-        sh "aws rds create-db-instance --db-instance-identifier ${DB_INSTANCE_IDENTIFIER} --engine postgres --engine-version 13.10 --allocated-storage 20 --db-instance-class db.t2.micro"
+        sh "aws rds create-db-instance --db-instance-identifier ${DB_INSTANCE_IDENTIFIER} --engine postgres --engine-version 13.10 --allocated-storage 20 --db-instance-class db.t3.micro"
     }
     
     // Stage: Wait for RDS Instance
