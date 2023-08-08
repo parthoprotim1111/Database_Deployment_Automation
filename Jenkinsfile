@@ -67,8 +67,7 @@ node {
             sh """${awsCliPath}/aws rds delete-db-instance \\
                 --db-instance-identifier ${DB_INSTANCE_IDENTIFIER} \\
                 --skip-final-snapshot
-
-
+            """
             
         }
     }
