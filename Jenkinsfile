@@ -69,8 +69,7 @@ node {
                 --db-instance-identifier ${DB_INSTANCE_IDENTIFIER} \\
                 --skip-final-snapshot
             """
-            
         }
-    
+    }
 
 }
