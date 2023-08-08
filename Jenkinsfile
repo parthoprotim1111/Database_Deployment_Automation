@@ -1,8 +1,7 @@
 node {
     def awsCliPath = env.AWS_CLI
 
-    withCredentials([string(credentialsId: 'AWS_Access', variable: 'AWS_ACCESS_KEY_ID'),
-                     string(credentialsId: 'AWS_Access', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Access', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
 
         def DB_INSTANCE_IDENTIFIER = 'mydbinstance'
         def DB_NAME = 'mydatabase'
