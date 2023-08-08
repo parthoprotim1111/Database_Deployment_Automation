@@ -62,6 +62,13 @@ node {
                 --db-instance-identifier ${DB_INSTANCE_IDENTIFIER} \\
                 --skip-final-snapshot
             """
+  stage('Delete RDS Instance') {
+            sh """${awsCliPath}/aws rds delete-db-instance \\
+                --db-instance-identifier ${DB_INSTANCE_IDENTIFIER} \\
+                --skip-final-snapshot
+
+
+            
         }
     }
 }
