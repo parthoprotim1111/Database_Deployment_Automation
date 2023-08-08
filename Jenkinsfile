@@ -11,6 +11,19 @@ node {
         def SCHEMA_NAME = 'myschema'
         def AWS_REGION = 'ap-south-1'
 
+        stage('Delete Existing RDS Instance') {
+            sh """${awsCliPath}/aws rds delete-db-instance \\
+                --db-instance-identifier ${DB_INSTANCE_IDENTIFIER} \\
+                --skip-final-snapshot
+            """
+        }
+
+        stage('Wait for Instance Deletion') {
+            sh """${awsCliPath}/aws rds wait db-instance-deleted \\
+                --db-instance-identifier ${DB_INSTANCE_IDENTIFIER}
+            """
+        }
+
         stage('Create RDS Instance') {
             sh """${awsCliPath}/aws rds create-db-instance \\
                 --db-instance-identifier ${DB_INSTANCE_IDENTIFIER} \\
