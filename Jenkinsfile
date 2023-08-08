@@ -12,7 +12,7 @@ node {
         def AWS_REGION = 'ap-south-1'
 
         stage('Create RDS Instance') {
-            sh """${awsCliPath}/bin/aws rds create-db-instance \\
+            sh """${awsCliPath}/aws rds create-db-instance \\
                 --db-instance-identifier ${DB_INSTANCE_IDENTIFIER} \\
                 --allocated-storage 20 \\
                 --db-instance-class db.t3.micro \\
