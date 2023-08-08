@@ -30,13 +30,13 @@ node {
         }
 
         stage('Wait for RDS Instance') {
-            sh """${awsCliPath}/bin/aws rds wait db-instance-available \\
+            sh """${awsCliPath}/aws rds wait db-instance-available \\
                 --db-instance-identifier ${DB_INSTANCE_IDENTIFIER}
             """
         }
 
         stage('Create Schema') {
-            sh """PGPASSWORD=${DB_PASSWORD} ${awsCliPath}/bin/psql \\
+            sh """PGPASSWORD=${DB_PASSWORD} ${awsCliPath}/psql \\
                 --host=${DB_INSTANCE_IDENTIFIER}.${AWS_REGION}.rds.amazonaws.com \\
                 --port=${DB_PORT} \\
                 --username=${DB_USERNAME} \\
@@ -46,7 +46,7 @@ node {
         }
 
         stage('Delete RDS Instance') {
-            sh """${awsCliPath}/bin/aws rds delete-db-instance \\
+            sh """${awsCliPath}/aws rds delete-db-instance \\
                 --db-instance-identifier ${DB_INSTANCE_IDENTIFIER} \\
                 --skip-final-snapshot
             """
