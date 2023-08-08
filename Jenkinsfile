@@ -54,7 +54,8 @@ node {
                 --port=${DB_PORT} \\
                 --username=${DB_USERNAME} \\
                 --dbname=${DB_NAME} \\
-                -c "CREATE SCHEMA ${SCHEMA_NAME}"
+                -c "CREATE SCHEMA ${SCHEMA_NAME}
+                """
             
 
         stage('Delete RDS Instance') {
