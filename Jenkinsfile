@@ -49,13 +49,16 @@ node {
         }
 
         stage('Create Schema') {
-          sh """PGPASSWORD=${DB_PASSWORD} psql \\\\
-            --host=${DB_INSTANCE_IDENTIFIER}.${AWS_REGION}.rds.amazonaws.com \\\\
-            --port=${DB_PORT} \\\\
-            --username=${DB_USERNAME} \\\\
-            --dbname=${DB_NAME} \\\\
-            -c "CREATE SCHEMA ${SCHEMA_NAME}"
-          """
+            docker.image('postgres:13').inside {
+                sh """
+                    PGPASSWORD=${DB_PASSWORD} psql \\
+                    --host=${DB_INSTANCE_IDENTIFIER}.${AWS_REGION}.rds.amazonaws.com \\
+                    --port=${DB_PORT} \\
+                    --username=${DB_USERNAME} \\
+                    --dbname=${DB_NAME} \\
+                    -c "CREATE SCHEMA ${SCHEMA_NAME}"
+                """
+            }
         }
 
         stage('Delete RDS Instance') {
